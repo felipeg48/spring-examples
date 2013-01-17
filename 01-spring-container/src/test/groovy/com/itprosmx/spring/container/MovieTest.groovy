@@ -14,7 +14,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner
 
 
 /**
- * @author fgutierrezcru
+ * @author Felipe
  *
  * This is a Test class that works with:
  * A. Using standard bean definition
