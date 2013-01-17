@@ -1,0 +1,2 @@
+name:Get Smart,actor:Steve Carrel,genre:Comedy,year:2005
+name:Little Miss Sunshine,actor:Steve Carrel,genre:Comedy,year:2000

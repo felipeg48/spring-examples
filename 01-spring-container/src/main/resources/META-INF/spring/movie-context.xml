@@ -6,12 +6,29 @@
                            http://www.springframework.org/schema/context
                            http://www.springframework.org/schema/context/spring-context-3.2.xsd">
 
+
+	<!-- 
+		In order to use this examples, you need to comment/uncomment out code following the 
+		different options.
+	 -->
+
 	<!-- A. Using standard bean definition -->
-	<!--
 	<bean id="movieRepository" class="com.itprosmx.spring.container.MovieRepositoryImpl" />
-	-->							 
+	
 									 
 	<!-- B. Using Annotations -->
+	<!-- 
 	<context:component-scan base-package="com.itprosmx.spring.container" />								 
+	-->
+	
+	<!-- C. Using 3.x Profile -->
+	<!-- 
+	<beans profile="dev">
+		<bean id="movieRepository" class="com.itprosmx.spring.container.MovieRepositoryImpl"/>
+	</beans>
+	<beans profile="qa">
+		<bean id="movieRepository" class="com.itprosmx.spring.container.MovieRepositoryImplText"/>
+	</beans>
+	-->
 									 
  </beans>
