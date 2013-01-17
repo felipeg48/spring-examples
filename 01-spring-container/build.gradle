@@ -1,0 +1,18 @@
+apply plugin: 'groovy'
+
+task "create-dirs" << {
+  sourceSets*.groovy.srcDirs*.each { it.mkdirs() }
+  sourceSets*.resources.srcDirs*.each { it.mkdirs() }
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	groovy 'org.codehaus.groovy:groovy-all:2.0.6'
+	compile 'org.springframework:spring-context:3.2.0.RELEASE'
+
+	testCompile 'junit:junit:4.8.2'
+	testCompile 'org.springframework:spring-test:3.2.0.RELEASE'
+}
