@@ -1,4 +1,4 @@
-package com.itprosmx.spring.amq
+package com.itprosmx.spring.amqp
 
 import static org.junit.Assert.*
 
@@ -11,7 +11,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration("/META-INF/spring/amqp-context.xml")
+@ContextConfiguration("/META-INF/spring/amqp-simple-context.xml")
 class SimpleTest {
 
 	@Autowired
@@ -20,6 +20,11 @@ class SimpleTest {
 	@Test
 	void simple() {
 		assertNotNull amqpTemplate
+		
+		amqpTemplate.convertAndSend "myqueue", "foo"
+		def foo = amqpTemplate.receiveAndConvert("myqueue")
+		assertNotNull foo
+		assertEquals "foo",foo
 	}
 
 }

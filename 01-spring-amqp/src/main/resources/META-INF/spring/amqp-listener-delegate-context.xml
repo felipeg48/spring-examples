@@ -1,0 +1,19 @@
+<beans 
+	xmlns="http://www.springframework.org/schema/beans" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:rabbit="http://www.springframework.org/schema/rabbit"
+	xsi:schemaLocation="
+	http://www.springframework.org/schema/rabbit http://www.springframework.org/schema/rabbit/spring-rabbit-1.1.xsd
+	http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd">
+            
+    <bean id="myListenerDelegate"  class="com.itprosmx.spring.amqp.MyListener" />
+            
+    <rabbit:connection-factory id="connectionFactory" username="guest" password="guest" host="localhost" />
+	<rabbit:admin connection-factory="connectionFactory"/>
+	<rabbit:queue name="myqueue"/>    
+	<rabbit:listener-container connection-factory="connectionFactory" >
+		<rabbit:listener queues="myqueue" ref="myListenerDelegate" />
+	</rabbit:listener-container>
+    
+</beans>
+                     
