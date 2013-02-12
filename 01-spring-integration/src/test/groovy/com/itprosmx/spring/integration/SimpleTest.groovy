@@ -23,7 +23,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner
 class SimpleTest {
 
 	@Autowired
-	MessageChannel messageChannel;
+	MessageChannel messageChannel
 	
 	@Test
 	void simpleTest() {
