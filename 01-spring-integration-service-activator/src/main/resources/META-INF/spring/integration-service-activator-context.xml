@@ -1,0 +1,15 @@
+<beans 
+	xmlns="http://www.springframework.org/schema/beans" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:si="http://www.springframework.org/schema/integration"
+	xmlns:si-stream="http://www.springframework.org/schema/integration/stream"
+	xsi:schemaLocation="
+	http://www.springframework.org/schema/integration/stream http://www.springframework.org/schema/integration/stream/spring-integration-stream-2.2.xsd
+	http://www.springframework.org/schema/integration http://www.springframework.org/schema/integration/spring-integration-2.2.xsd
+	http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd">
+  
+  	<si:channel id="messageChannel" />
+ 	
+  
+</beans>
+           
