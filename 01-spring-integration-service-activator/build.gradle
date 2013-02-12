@@ -16,6 +16,7 @@ dependencies {
 	
 	groovy 'org.codehaus.groovy:groovy-all:2.0.6'
 	compile 'org.springframework:spring-context:3.2.0.RELEASE'
+	runtime 'log4j:log4j:1.2.17'
 	
 	testCompile 'junit:junit:4.8.2'
 	testCompile 'org.springframework:spring-test:3.2.0.RELEASE'

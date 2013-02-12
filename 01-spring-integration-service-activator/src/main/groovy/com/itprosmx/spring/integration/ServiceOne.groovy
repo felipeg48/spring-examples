@@ -3,13 +3,13 @@
  */
 package com.itprosmx.spring.integration
 
-import groovy.util.logging.Log
+import groovy.util.logging.Log4j
 
 /**
  * @author felipeg
  *
  */
-@Log
+@Log4j
 class ServiceOne {
 
 	void processModel(Model model){
