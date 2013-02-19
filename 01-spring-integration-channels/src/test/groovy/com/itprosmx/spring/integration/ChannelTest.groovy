@@ -14,6 +14,7 @@ import org.springframework.integration.MessageChannel
 import org.springframework.integration.MessageHeaders
 import org.springframework.integration.channel.PublishSubscribeChannel
 import org.springframework.integration.channel.QueueChannel
+import org.springframework.integration.channel.RendezvousChannel
 import org.springframework.integration.core.MessageHandler
 import org.springframework.integration.message.GenericMessage
 import org.springframework.integration.support.MessageBuilder
@@ -39,6 +40,12 @@ class ChannelTest {
 	
 	@Autowired
 	MessageChannel priorityWithComparatorChannel
+	
+	@Autowired
+	MessageChannel rendezvousChannel
+	
+	@Autowired
+	MessageChannel replyChannel
 	
 	@Test
 	@Ignore
@@ -152,8 +159,37 @@ class ChannelTest {
 	}
 	
 	@Test
-	@Ignore
 	void rendezvousChannelTest(){
+		//Step 0. Some variables
+		def replyMessage  = "Got it"
 		
+		//Producer
+		//Step 1. Build the message and send it
+		Thread.start {
+			println "Producer: Sending Message and waiting for reply"
+			def msg = MessageBuilder
+					  .withPayload("A rendezvous message")
+					  .setHeader(MessageHeaders.REPLY_CHANNEL, replyChannel).build()
+					  assertNotNull msg
+					  rendezvousChannel.send msg,10000
+					  
+			Message rp = ((QueueChannel) replyChannel).receive(10000)
+			assertNotNull rp
+			println "Producer: Consumer reply > ${rp.payload}"
+			assertEquals replyMessage,rp.payload
+		}
+		//Consumer
+		//Step 2. Received the message and identify if it needs reply
+		Message message = ((RendezvousChannel) rendezvousChannel).receive(10000)
+		assertNotNull message
+		println "Consumer: $message"
+		
+		//Step 2.1. Get the reply channel 
+		def reply = message.getHeaders().get(MessageHeaders.REPLY_CHANNEL)
+		assertNotNull reply
+	
+		//Step 2.2. Send a Reply to it 
+		Message<String> gotit = new GenericMessage<String>(replyMessage)
+		reply.send gotit
 	}
 }

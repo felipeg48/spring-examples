@@ -28,7 +28,11 @@
 	</int:channel>
 	
 	<!-- rendezvousChannelTest -->
+	<int:channel id="replyChannel">
+		<int:queue capacity="10" />
+	</int:channel>
 	<int:channel id="rendezvousChannel">
 		<int:rendezvous-queue/>
 	</int:channel>
+	
 </beans>
