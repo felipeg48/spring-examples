@@ -16,6 +16,7 @@ local.properties
 .buildpath
 .DS_Store
 .gradle
+.springBeans
 Servers/
 **/build
 **/bin
