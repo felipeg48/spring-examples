@@ -27,7 +27,7 @@ class SimpleTest {
 	
 	@Test
 	void simpleTest() {
-		Message<String> message = new GenericMessage<String>("Simple Message");
+		Message<String> message = new GenericMessage<String>("Simple Message")
 		assertNotNull message
 		messageChannel.send message
 		

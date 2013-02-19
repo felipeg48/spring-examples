@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:int="http://www.springframework.org/schema/integration"
+	xmlns:int-stream="http://www.springframework.org/schema/integration/stream"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+		http://www.springframework.org/schema/integration http://www.springframework.org/schema/integration/spring-integration-2.2.xsd
+		http://www.springframework.org/schema/integration/stream http://www.springframework.org/schema/integration/stream/spring-integration-stream-2.2.xsd">
+
+
+	<!-- p2pChannelTest -->
+	<int:channel id="messageChannel">
+		<int:queue capacity="10" />
+	</int:channel>
+	
+	<!-- pubsubChannelTest -->
+	<int:publish-subscribe-channel id="pubsubChannel"/>
+	
+	<!-- priorityChannelTest -->
+	<int:channel id="priorityChannel">
+		<int:priority-queue capacity="10" />
+	</int:channel>
+	
+	<!-- priorityWithComparatorChannelTest -->
+	<bean id="simpleModelComparator" class="com.itprosmx.spring.integration.SimpleModelComparator" />
+	<int:channel id="priorityWithComparatorChannel">
+		<int:priority-queue capacity="10" comparator="simpleModelComparator"/>
+	</int:channel>
+	
+	<!-- rendezvousChannelTest -->
+	<int:channel id="rendezvousChannel">
+		<int:rendezvous-queue/>
+	</int:channel>
+</beans>
