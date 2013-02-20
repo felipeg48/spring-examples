@@ -47,6 +47,9 @@ class ChannelTest {
 	@Autowired
 	MessageChannel replyChannel
 	
+	@Autowired
+	PublishSubscribeChannel publishSubscribeChannel
+	
 	@Test
 	@Ignore
 	void p2pChannelTest() {
@@ -159,6 +162,7 @@ class ChannelTest {
 	}
 	
 	@Test
+	@Ignore
 	void rendezvousChannelTest(){
 		//Step 0. Some variables
 		def replyMessage  = "Got it"
@@ -191,5 +195,29 @@ class ChannelTest {
 		//Step 2.2. Send a Reply to it 
 		Message<String> gotit = new GenericMessage<String>(replyMessage)
 		reply.send gotit
+	}
+	
+	@Test
+	void publishSubscribeChannelTest(){
+		//Consumer
+		//Step 1. Create Handler
+		def handler = [ handleMessage: { msg -> println "Message (Received): $msg" } ] as MessageHandler
+		//Step 2. Subscribe
+		publishSubscribeChannel.subscribe(handler)
+		
+		//Producer
+		//Step 3. 
+		Message<String> msg = new GenericMessage<String>("Hello PublishSubscribeChannel!!")
+		publishSubscribeChannel.send msg
+		
+		//Consumer
+		//Step 4. Unsubscribe
+		publishSubscribeChannel.unsubscribe(handler)
+		
+		
+		//Producer
+		//Step 5.
+		msg = new GenericMessage<String>("Another message")
+		publishSubscribeChannel.send msg
 	}
 }

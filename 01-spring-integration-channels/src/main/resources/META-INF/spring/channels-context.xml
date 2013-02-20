@@ -35,4 +35,7 @@
 		<int:rendezvous-queue/>
 	</int:channel>
 	
+	<!-- publishSubscribeChannelTest -->
+	<int:publish-subscribe-channel id="publishSubscribeChannel"/>
+	
 </beans>
