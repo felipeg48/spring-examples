@@ -12,6 +12,9 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.integration.Message
 import org.springframework.integration.MessageChannel
 import org.springframework.integration.MessageHeaders
+import org.springframework.integration.channel.DirectChannel
+import org.springframework.integration.channel.ExecutorChannel
+import org.springframework.integration.channel.PriorityChannel
 import org.springframework.integration.channel.PublishSubscribeChannel
 import org.springframework.integration.channel.QueueChannel
 import org.springframework.integration.channel.RendezvousChannel
@@ -36,13 +39,13 @@ class ChannelTest {
 	MessageChannel pubsubChannel
 	
 	@Autowired
-	MessageChannel priorityChannel
+	PriorityChannel priorityChannel
 	
 	@Autowired
-	MessageChannel priorityWithComparatorChannel
+	PriorityChannel priorityWithComparatorChannel
 	
 	@Autowired
-	MessageChannel rendezvousChannel
+	RendezvousChannel rendezvousChannel
 	
 	@Autowired
 	MessageChannel replyChannel
@@ -50,9 +53,22 @@ class ChannelTest {
 	@Autowired
 	PublishSubscribeChannel publishSubscribeChannel
 	
+	@Autowired
+	DirectChannel directChannel
+	
+	@Autowired
+	ExecutorChannel executorChannel
+	
+	
+	def banner = { title ->
+		println "*" * 50
+		println "** $title"
+		println "*" * 50
+	}
+	
 	@Test
-	@Ignore
 	void p2pChannelTest() {
+		banner "p2pChannelTest"
 		//Producer
 		//Step 1. Build the Message
 		Message<String> message = new GenericMessage<String>("Simple Message")
@@ -69,8 +85,8 @@ class ChannelTest {
 	}
 
 	@Test
-	@Ignore
 	void pubsubChannelTest(){
+		banner "pubsubChannelTest"
 		//Consumer
 		//Step 1. Subscribe to the Channel
 		((PublishSubscribeChannel)pubsubChannel).
@@ -91,9 +107,8 @@ class ChannelTest {
 	}
 	
 	@Test
-	@Ignore
 	void priorityChannelTest(){
-		
+		banner "priorityChannelTest"
 		//Step 0. Some variables
 		String payloadPriorityLow  = "Low Priority"
 		String payloadPriorityHigh = "High Priority"
@@ -126,8 +141,8 @@ class ChannelTest {
 	}
 	
 	@Test
-	@Ignore
 	void priorityWithComparatorChannelTest(){
+		banner "priorityWithComparatorChannelTest"
 		//Step 0. Model
 		def payloadPriorityLow = new SimpleModel(name:"Doe",phone:"1-800-VMWARE",birthday:Date.parse("yyyy-mm-dd","1990-08-22"))
 		def payloadPriorityHigh = new SimpleModel(name:"John",phone:"1-800-SPRING",birthday:Date.parse("yyyy-mm-dd","1980-08-22"))
@@ -162,8 +177,8 @@ class ChannelTest {
 	}
 	
 	@Test
-	@Ignore
 	void rendezvousChannelTest(){
+		banner "rendezvousChannelTest"
 		//Step 0. Some variables
 		def replyMessage  = "Got it"
 		
@@ -199,11 +214,12 @@ class ChannelTest {
 	
 	@Test
 	void publishSubscribeChannelTest(){
+		banner "publishSubscribeChannelTest"
 		//Consumer
 		//Step 1. Create Handler
 		def handler = [ handleMessage: { msg -> println "Message (Received): $msg" } ] as MessageHandler
 		//Step 2. Subscribe
-		publishSubscribeChannel.subscribe(handler)
+		publishSubscribeChannel.subscribe handler
 		
 		//Producer
 		//Step 3. 
@@ -212,12 +228,74 @@ class ChannelTest {
 		
 		//Consumer
 		//Step 4. Unsubscribe
-		publishSubscribeChannel.unsubscribe(handler)
+		publishSubscribeChannel.unsubscribe handler
 		
 		
 		//Producer
 		//Step 5.
 		msg = new GenericMessage<String>("Another message")
 		publishSubscribeChannel.send msg
+	}
+	
+	@Test
+	void directChannelTest(){
+		banner "directChannelTest"
+		//Consumers
+		//Step 1. Declare handlers
+		def handlerC1 = [ handleMessage: { msg -> println "Message (Received) for Consumer 1: $msg" } ] as MessageHandler
+		def handlerC2 = [ handleMessage: { msg -> println "Message (Received) for Consumer 2: $msg" } ] as MessageHandler
+		def handlerC3 = [ handleMessage: { msg -> println "Message (Received) for Consumer 3: $msg" } ] as MessageHandler
+		
+		//Step 2. Subscribe
+		directChannel.subscribe handlerC1
+		directChannel.subscribe handlerC2
+		directChannel.subscribe handlerC3
+	
+		//Producer
+		//Step 3. Send the messages
+		Message<String> msg = new GenericMessage<String>("Hello Direct Channel!!")
+		9.times {
+			//The consumer is choose through RoundRobin, an one message at a time
+			directChannel.send msg
+			sleep 800
+		}
+	}
+	
+	@Test
+	void executorChannelTest(){
+		banner "executorChannelTest"
+		//Consumers
+		//Step 1. Declare handlers
+		def handlerC1 = [ handleMessage: { msg -> println "Message (Received) for Consumer 1: $msg" } ] as MessageHandler
+		def handlerC2 = [ handleMessage: { msg -> println "Message (Received) for Consumer 2: $msg" } ] as MessageHandler
+		def handlerC3 = [ handleMessage: { msg -> println "Message (Received) for Consumer 3: $msg" } ] as MessageHandler
+		def handlerC4 = [ handleMessage: { msg -> println "Message (Received) for Consumer 4: $msg" } ] as MessageHandler
+		
+		//Step 2. Subscribe
+		executorChannel.subscribe handlerC1
+		executorChannel.subscribe handlerC2
+		executorChannel.subscribe handlerC3
+	
+		//Producer
+		//Step 4. Send the messages
+		Message<String> msg = new GenericMessage<String>("Hello Executor Channel!!")
+		
+		15.times {
+			//The consumer is choose through RoundRobin, an one message at a time
+			//and is a failover test
+			executorChannel.send msg
+			sleep 500
+			switch(it){
+				case 2:
+					executorChannel.unsubscribe handlerC1
+					break
+				case 5:
+					executorChannel.unsubscribe handlerC2
+					break
+				case 7:
+					executorChannel.subscribe handlerC4
+					break
+			}
+		}
 	}
 }
