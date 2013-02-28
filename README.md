@@ -5,6 +5,7 @@ Spring Examples: the idea behind these examples is to have a quick-start guide i
 
 **NOTES**
 
+ * The '**01**' Means **basic examples**.
  * All the projects are based on Groovy and Gradle.
  * Projects with beginning with **'j'** are based on Java 
  * There are projects that don't contain UNIT TEST but groovy scripts.
