@@ -12,4 +12,12 @@
 		http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-3.2.xsd">
 
 
+	<!-- serviceActivatorTest -->
+	<bean id="serviceActivatorBean" class="com.itprosmx.spring.integration.ServiceActivatorBean" />
+	<int:channel id="messageChannelSA" />
+	<int:service-activator input-channel="messageChannelSA" ref="serviceActivatorBean" method="process"/>
+		
+
+	
+
 </beans>

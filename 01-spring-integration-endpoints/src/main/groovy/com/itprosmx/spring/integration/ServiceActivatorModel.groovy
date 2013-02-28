@@ -3,14 +3,14 @@
  */
 package com.itprosmx.spring.integration
 
-import groovy.transform.ToString
+import java.util.Date;
 
 /**
  * @author felipeg
  *
  */
-@ToString(includeFields=true,includePackage=false)
-class SimpleModel {
+@groovy.transform.ToString(includeNames=true,includePackage=false)
+class ServiceActivatorModel {
 	String name
 	String phone
 	Date birthday
