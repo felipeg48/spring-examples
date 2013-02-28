@@ -1,11 +1,17 @@
-spring-examples
+Spring Examples
 ===============
 
 Spring Examples: the idea behind these examples is to have a quick-start guide in how to setup different alternatives for use the Spring Framework and its different modules.
 
+There will be (work in progress) several levels and it will be enumerated. Must of the projects are Groovy based, but sometimes they could be annotated with an initial letter, like **j** meaning that the project is based on Java. :
+
+ * 01 - Basic Level
+ * 02 - Intermediate Level
+ * 03 - Advanced Level
+ * 04 - Complete Solution
+
 **NOTES**
 
- * The **01** Means **basic examples**.
  * All the projects are based on Groovy and Gradle.
  * Projects with beginning with **'j'** are based on Java 
  * There are projects that don't contain UNIT TEST but groovy scripts.
