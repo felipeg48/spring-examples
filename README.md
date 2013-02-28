@@ -10,9 +10,10 @@ Spring Examples: the idea behind these examples is to have a quick-start guide i
  * There are projects that don't contain UNIT TEST but groovy scripts.
 
 ###01 - Spring Container
-|Project:|
-|:-| 
-|01-spring-container|
+<table>
+<tr><td>Project:</td></tr>
+<tr><td>01-spring-container</td></tr>
+</table>
 
 This project covers the essential spring container, with some variations like:
 
@@ -21,9 +22,10 @@ This project covers the essential spring container, with some variations like:
  * Using Profile
  
 ###01 - Spring AMQP 
-|Project:|
-|:-| 
-|01-spring-amqp|
+<table>
+<tr><td>Project:</td></tr>
+<tr><td>01-spring-amqp</td></tr>
+</table>
 
 This project covers the spring-amqp module.
 
@@ -32,31 +34,35 @@ This project covers the spring-amqp module.
  * ListenerDelegate - (ListenerDelegateTest) example for using ***asynchronous*** consumers using a ***delegate***. 
  
 ###01 - Spring Integration
-|Project:|
-|:-| 
-|01-spring-integration|
+<table>
+<tr><td>Project:</td></tr>
+<tr><td>01-spring-integration</td></tr>
+</table>
  
 This project covers the spring-integration module.
  
  * Simple - (SimpleTest) is the minimal configuration to send a message to a channel and print it out to the stream (console).
  
 ###01 - Spring Integration: Service Activator
-|Project:|
-|:-| 
-|01-spring-integration-service-activator|
+<table>
+<tr><td>Project:</td></tr>
+<tr><td>01-spring-integration-service-activator</td></tr>
+</table>
 
 This project contains different examples on how to use the service-activator endpoint.
 
-|Project:|
-|:-| 
-|j01-spring-integration-service-activator|
+<table>
+<tr><td>Project:</td></tr>
+<tr><td>j01-spring-integration-service-activator</td></tr>
+</table>
 
 This project is a Java version of the service-activator endpoint, and its based on a maven artifact.
 
 ###01 - Spring Integration: Channels
-|Project:|
-|:-| 
-|01-spring-integration-channels|
+<table>
+<tr><td>Project:</td></tr>
+<tr><td>01-spring-integration-channels</td></tr>
+</table>
 
 This project shows how to implement all available channels from the Spring Integration module:
 
@@ -68,9 +74,10 @@ This project shows how to implement all available channels from the Spring Integ
  * Executor
 
 ###01 - Spring Integration: EndPoints
-|Project:|
-|:-| 
-|01-spring-integration-endpoints|
+<table>
+<tr><td>Project:</td></tr>
+<tr><td>01-spring-integration-endpoints</td></tr>
+</table>
 
 This project shows how to implement different endpoints from the Spring Integration module:
 
@@ -81,9 +88,10 @@ This project shows how to implement different endpoints from the Spring Integrat
  * Delayer
 
 ###01 - Spring / Camel
-|Project:|
-|:-| 
-|01-spring-camel|
+<table>
+<tr><td>Project:</td></tr>
+<tr><td>01-spring-camel</td></tr>
+</table>
 
 This project shows the Spring and Camel working together. Its another alternative to Spring Integration. Part of the code was using the **BeanBuilder** from Grails.
 
