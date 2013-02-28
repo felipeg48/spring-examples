@@ -14,4 +14,5 @@ class ServiceActivatorModel {
 	String name
 	String phone
 	Date birthday
+	String tag
 }

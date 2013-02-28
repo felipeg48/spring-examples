@@ -17,7 +17,17 @@
 	<int:channel id="messageChannelSA" />
 	<int:service-activator input-channel="messageChannelSA" ref="serviceActivatorBean" method="process"/>
 		
-
+	<!-- serviceActivatorReplyTest -->
+	<int:channel id="messageChannelSAReply" />
+	<int:channel id="messageChannelSAReplyOutput">
+		<int:queue capacity="10"/>
+	</int:channel>
+	<int:service-activator input-channel="messageChannelSAReply" output-channel="messageChannelSAReplyOutput" ref="serviceActivatorBean" method="processReply"/>
 	
-
+	<!-- messageBridgeTest -->
+	<int:channel id="inputChannel" />
+	<int:channel id="outputChannel"/> 
+	<int:bridge input-channel="inputChannel" output-channel="outputChannel" />
+	<int:service-activator input-channel="outputChannel" ref="serviceActivatorBean" method="process"/>
+	
 </beans>
