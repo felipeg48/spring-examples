@@ -1,18 +1,21 @@
 package com.itprosmx.spring.camel
 
+import groovy.util.logging.Log4j
+
 /**
  * 
  * @author felipeg
  *
  */
+@Log4j
 class SampleBean {
 	
 	def run(){
-		println "Hello Groovy Camel"
+		log.info "Hello Groovy Camel"
 	}
 	
 	def message(msg){
 		def result = new String(msg)
-		println "Got: $result"
+		log.info "Got: $result"
 	}
 }
