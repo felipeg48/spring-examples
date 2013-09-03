@@ -16,6 +16,7 @@ public class MultiThreadMain {
 	public void test() {
 		ThreadPoolTaskExecutor task = new ThreadPoolTaskExecutor();
 		task.setCorePoolSize(5);
+		task.setMaxPoolSize(5);
 		task.setWaitForTasksToCompleteOnShutdown(true);
 		task.afterPropertiesSet();
 		
