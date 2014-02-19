@@ -14,12 +14,12 @@ repositories {
 
 dependencies {
 	
-	groovy 'org.codehaus.groovy:groovy-all:2.0.7'
-	compile 'org.springframework:spring-context:3.2.0.RELEASE'
+	groovy 'org.codehaus.groovy:groovy-all:2.1.8'
+	compile 'org.springframework:spring-context:4.0.1.RELEASE'
 	
 	testCompile 'junit:junit:4.8.2'
-	testCompile 'org.springframework:spring-test:3.2.0.RELEASE'
-	testCompile 'org.springframework.amqp:spring-rabbit:1.1.3.RELEASE'
+	testCompile 'org.springframework:spring-test:4.0.1.RELEASE'
+	testCompile 'org.springframework.amqp:spring-rabbit:1.2.1.RELEASE'
 	testCompile 'org.codehaus.jackson:jackson-mapper-asl:1.9.12'
 	
 }

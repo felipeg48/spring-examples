@@ -21,3 +21,4 @@ Servers/
 **/build
 **/bin
 **/target
+/build
