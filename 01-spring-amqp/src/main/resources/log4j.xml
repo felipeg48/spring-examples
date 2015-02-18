@@ -15,6 +15,10 @@
 		<level value="warn" />
 	</logger>
 
+	<logger name="org.springframework.amqp">
+	    <level value="info" />
+	</logger>
+	
 	<logger name="com.itprosmx.spring.integration">
 		<level value="info" />
 	</logger>

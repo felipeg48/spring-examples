@@ -6,10 +6,13 @@ beans{
  	camel {
 		 camelContext(id:'camelContext', trace:true) {
 			camel.'route'{
-				camel.'from'(uri:'spring-amqp:myexchage:myqueue') {}
-				camel.'to'(uri:"bean://sample?method=message") {}
-				
+				camel.'from'(uri:'direct://message')
+				camel.'to'(uri:'spring-amqp:my.direct.exchange:my.direct.queue:here.*?type=directc&durable=true&autodelete=false') {}
 			} 
+			camel.'route'{
+				camel.'from'(uri:'spring-amqp:my.direct.exchange:my.direct.queue:here.*?type=directc&durable=true&autodelete=false')
+				camel.'to'(uri:"bean://sample?method=message") {}
+			}
 		 }
 	 }
 	 

@@ -15,4 +15,5 @@ dependencies {
 	compile 'org.grails:grails-spring:2.2.0'
 	compile 'org.springframework.amqp:spring-rabbit:1.1.3.RELEASE'
 	runtime 'com.bluelock:camel-spring-amqp:1.4'
+	runtime 'log4j:log4j:1.2.16'
 }

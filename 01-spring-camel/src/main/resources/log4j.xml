@@ -14,8 +14,12 @@
 	<logger name="org.springframework.integration">
 		<level value="warn" />
 	</logger>
+	
+	<logger name="amqp.spring.camel">
+		<level value="off" />
+	</logger>
 
-	<logger name="com.itprosmx.spring.integration">
+	<logger name="com.itprosmx.spring">
 		<level value="info" />
 	</logger>
 
