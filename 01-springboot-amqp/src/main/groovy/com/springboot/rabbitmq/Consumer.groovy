@@ -2,11 +2,12 @@ package com.springboot.rabbitmq
 
 import org.springframework.amqp.core.AcknowledgeMode
 import org.springframework.amqp.core.Message
-import org.springframework.amqp.rabbit.connection.ConnectionFactory;
+import org.springframework.amqp.rabbit.connection.CachingConnectionFactory;
+import org.springframework.amqp.rabbit.connection.ConnectionFactory
 import org.springframework.amqp.rabbit.core.ChannelAwareMessageListener
 import org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer
 import org.springframework.amqp.rabbit.listener.adapter.MessageListenerAdapter
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 
@@ -20,6 +21,7 @@ class Consumer {
 
 	@Bean
 	SimpleMessageListenerContainer container() {
+		(this.connectionFactory as CachingConnectionFactory).requestedHeartBeat = 10
 		def container = new SimpleMessageListenerContainer(this.connectionFactory)
 		
 		def listener = [
