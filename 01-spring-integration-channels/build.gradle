@@ -14,12 +14,21 @@ repositories {
 
 dependencies {
 	
-	groovy 'org.codehaus.groovy:groovy-all:2.0.6'
-	compile 'org.springframework:spring-context:3.2.0.RELEASE'
+	compile 'org.codehaus.groovy:groovy-all:2.3.0'
+	compile 'org.springframework.integration:spring-integration-core:4.1.5.RELEASE'
+	compile 'org.springframework.integration:spring-integration-stream:4.1.5.RELEASE'
+	compile 'org.springframework:spring-context:4.1.6.RELEASE'
+	compile 'org.springframework:spring-messaging:4.1.6.RELEASE'
 	runtime 'log4j:log4j:1.2.17'
 	
-	testCompile 'junit:junit:4.8.2'
-	testCompile 'org.springframework:spring-test:3.2.0.RELEASE'
-	testCompile 'org.springframework.integration:spring-integration-core:2.2.1.RELEASE'
-	testCompile 'org.springframework.integration:spring-integration-stream:2.2.1.RELEASE'
+	testCompile 'junit:junit:4.12'
+	testCompile 'org.springframework:spring-test:4.1.6.RELEASE'
+	
+}
+
+test {
+	testLogging {
+		events 'started', 'passed'
+		exceptionFormat = 'full'
+	}
 }

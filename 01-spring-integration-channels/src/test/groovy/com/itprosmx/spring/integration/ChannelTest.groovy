@@ -5,22 +5,21 @@ package com.itprosmx.spring.integration
 
 import static org.junit.Assert.*
 
-import org.junit.Ignore
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.integration.Message
-import org.springframework.integration.MessageChannel
-import org.springframework.integration.MessageHeaders
 import org.springframework.integration.channel.DirectChannel
 import org.springframework.integration.channel.ExecutorChannel
 import org.springframework.integration.channel.PriorityChannel
 import org.springframework.integration.channel.PublishSubscribeChannel
 import org.springframework.integration.channel.QueueChannel
 import org.springframework.integration.channel.RendezvousChannel
-import org.springframework.integration.core.MessageHandler
-import org.springframework.integration.message.GenericMessage
 import org.springframework.integration.support.MessageBuilder
+import org.springframework.messaging.Message
+import org.springframework.messaging.MessageChannel
+import org.springframework.messaging.MessageHandler
+import org.springframework.messaging.MessageHeaders
+import org.springframework.messaging.support.GenericMessage
 import org.springframework.test.context.ContextConfiguration
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner
 
@@ -115,13 +114,14 @@ class ChannelTest {
 		
 		//Producer
 		//Step 1. Build the Message and send
-		Message<String> message = MessageBuilder.withPayload(payloadPriorityLow).setHeader(MessageHeaders.PRIORITY, 1).build();
+		
+		Message<String> message = MessageBuilder.withPayload(payloadPriorityLow).setPriority(1).build()
 		assertNotNull message
 		println "Sending Low Priority Message, with value 1"
 		priorityChannel.send message
 		
 		//Step 2. Send another message with higher priority
-		message = MessageBuilder.withPayload(payloadPriorityHigh).setHeader(MessageHeaders.PRIORITY, 10).build();
+		message = MessageBuilder.withPayload(payloadPriorityHigh).setPriority(10).build()
 		assertNotNull message
 		println "Sending High Priority Message, with value 10"
 		priorityChannel.send message
